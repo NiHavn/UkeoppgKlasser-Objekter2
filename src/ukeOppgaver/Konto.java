@@ -10,7 +10,7 @@ public class Konto {
     public Konto(String navn, int kontonr, double saldo) {
         this.navn = "Roger Andersen";
         this.kontonr = 1234567891;
-        this.saldo = 400.49;
+        this.saldo = 400;
     }
 
     public String getNavn() {
@@ -34,29 +34,34 @@ public class Konto {
         this.saldo = saldo;
     }
 
+    public void getSkrivut(){
+        showMessageDialog(null, "Navn : " + getNavn() +
+                "\nKontonr : " + getKontonr() +
+                "\nSaldo" + getSaldo());
+    }
 
     /*  Kontoutskrifts-metode, som skriver ut kontoinnehaverens
        navn, kontonummer og saldo i et dialogvindu. */
 
-    public Konto kontoInnskudd = new Konto(getNavn(), getKontonr(),getSaldo()) {
-
+    public String getInnskudd(double Innskudd){
+        saldo = saldo + Innskudd;
+        return "Den nye saldoen er " + saldo;
     }
-        String mere = showInputDialog("Skriv inn innskuddet");
-        double Innskudd = Double.parseDouble(mere);
-        double innskudd = getSaldo() + Innskudd;
-
-
-
     /*  Metode som setter inn et beløp på kontoen.
         Beløpets størrelse skal tas imot via en parameter til metoden.
         Metoden skal returnere en tekst som inneholder informasjon om
         den nye saldoen.  */
-    public Konto kontoUttak = new Konto(getNavn(),getKontonr(),getSaldo()){
-        String mindre = showInputDialog("Skriv inn fratrekket");{
-            double Uttak = Double.parseDouble(mindre);
-            double uttak = getSaldo() - Uttak;
+
+    public String getUttak(double Uttak){
+
+        if(saldo < Uttak){
+            return "Det er utilstrekkelig dekning på kontoen";
         }
-    };
+        saldo = saldo - Uttak;
+        {
+            return "Den nye saldoen på kontoen er : " + saldo;
+        }
+    }
     /*  Metode som tar ut et beløp fra kontoen, under forutsetning av
         at det er dekning for beløpet.
         Uttaks-beløpets størrelse skal tas imot via en parameter til metoden.
